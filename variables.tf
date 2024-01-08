@@ -17,10 +17,10 @@ variable "database_name" {
   type        = string
 }
 
-variable "db_port" {
+variable "port" {
   description = "RDS port"
   type        = number
-  default     = "5432"
+  default     = null
 }
 
 variable "deletion_protection" {
@@ -42,11 +42,13 @@ variable "engine_version" {
 variable "enabled_cloudwatch_logs_exports" {
   description = "Enabled cloudwatch logs export"
   type        = list(any)
+  default     = []
 }
 
 variable "instance_count" {
   description = "Minimum instance for scaling"
   type        = number
+  default     = 0
 }
 
 variable "instance_class" {
@@ -120,18 +122,6 @@ variable "engine_mode" {
   default     = "provisioned"
 }
 
-variable "egress" {
-  description = "Outbound traffic for security group"
-  type        = list(any)
-  default     = []
-}
-
-variable "ingress" {
-  description = "Inbound traffic for security group"
-  type        = list(any)
-  default     = []
-}
-
 variable "maintenance_window" {
   description = "When to perform DB maintenance"
   type        = string
@@ -140,6 +130,18 @@ variable "maintenance_window" {
 
 variable "enhanced_monitoring_interval" {
   description = "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60."
+  type        = number
+  default     = 0
+}
+
+variable "max_capacity" {
+  description = "Maximum capacity for an Aurora DB cluster in provisioned DB engine mode. Valid capacity values are in a range of 0.5 up to 128 in steps of 0.5."
+  type        = number
+  default     = 0
+}
+
+variable "min_capacity" {
+  description = "Minimum capacity for an Aurora DB cluster in provisioned DB engine mode. Valid capacity values are in a range of 0.5 up to 128 in steps of 0.5."
   type        = number
   default     = 0
 }
@@ -190,4 +192,10 @@ variable "storage_encrypted" {
   description = "Skip final snapshot"
   type        = bool
   default     = true
+}
+
+variable "scaling_configuration" {
+  description = "scaling_configuration configuration is only valid when engine_mode is set to serverless"
+  type        = map(any)
+  default     = {}
 }

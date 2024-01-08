@@ -9,9 +9,10 @@ data "aws_kms_key" "rds" {
 }
 
 locals {
-  family                   = "${var.engine}${split(".", var.engine_version)[0]}"
+  family                   = var.engine == "aurora-postgresql" ? "${var.engine}${split(".", var.engine_version)[0]}" : join("", [var.engine, var.engine_version])
   cluster_parameter_group  = length(var.cluster_custom_parameters) > 0 ? aws_rds_cluster_parameter_group.cluster[0].name : "default.${local.family}"
   instance_parameter_group = length(var.instance_custom_parameters) > 0 ? aws_db_parameter_group.instance[0].name : "default.${local.family}"
+  port                     = var.engine == "aurora-postgresql" ? 5432 : 3306
 }
 
 #tfsec:ignore:aws-rds-encrypt-cluster-storage-data
@@ -33,16 +34,34 @@ resource "aws_rds_cluster" "db" {
   vpc_security_group_ids          = [module.sg_rds.id]
   db_subnet_group_name            = aws_db_subnet_group.rds.id
   db_cluster_parameter_group_name = local.cluster_parameter_group
-  port                            = var.db_port
+  port                            = var.port == null ? local.port : var.port
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
   deletion_protection             = var.deletion_protection
   apply_immediately               = var.apply_immediately
-  tags = {
-    Name = var.name
+
+  dynamic "serverlessv2_scaling_configuration" {
+    for_each = var.instance_class == "db.serverless" ? [1] : []
+
+    content {
+      max_capacity = var.max_capacity
+      min_capacity = var.min_capacity
+    }
   }
 
-  lifecycle {
-    prevent_destroy = false #true
+  dynamic "scaling_configuration" {
+    for_each = var.engine_mode == "serverless" ? [1] : []
+
+    content {
+      auto_pause               = try(var.scaling_configuration.auto_pause, null)
+      max_capacity             = try(var.scaling_configuration.maximum_capacity, null)
+      min_capacity             = try(var.scaling_configuration.minimum_capacity, null)
+      seconds_until_auto_pause = try(var.scaling_configuration.seconds_until_auto_pause, null)
+      timeout_action           = try(var.scaling_configuration.timeout_action, null)
+    }
+  }
+
+  tags = {
+    Name = var.name
   }
 }
 
@@ -67,10 +86,6 @@ resource "aws_rds_cluster_instance" "db" {
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
   performance_insights_kms_key_id       = var.performance_insights_enabled ? data.aws_kms_key.rds.arn : null
-
-  lifecycle {
-    prevent_destroy = false #true
-  }
 }
 
 resource "aws_db_subnet_group" "rds" {
@@ -78,10 +93,6 @@ resource "aws_db_subnet_group" "rds" {
   subnet_ids = var.subnets
   tags = {
     Name = var.name
-  }
-
-  lifecycle {
-    prevent_destroy = false #true
   }
 }
 
@@ -99,9 +110,6 @@ resource "aws_rds_cluster_parameter_group" "cluster" {
       value        = parameter.value.value
     }
   }
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 ## Custom instance/db parameter group
@@ -117,9 +125,6 @@ resource "aws_db_parameter_group" "instance" {
       name         = parameter.value.name
       value        = parameter.value.value
     }
-  }
-  lifecycle {
-    create_before_destroy = true
   }
 }
 
