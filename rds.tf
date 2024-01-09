@@ -31,7 +31,7 @@ resource "aws_rds_cluster" "db" {
   preferred_maintenance_window    = var.maintenance_window
   skip_final_snapshot             = var.skip_final_snapshot
   copy_tags_to_snapshot           = true
-  vpc_security_group_ids          = [module.sg_rds.id]
+  vpc_security_group_ids          = var.vpc_security_group_ids
   db_subnet_group_name            = aws_db_subnet_group.rds.id
   db_cluster_parameter_group_name = local.cluster_parameter_group
   port                            = var.port == null ? local.port : var.port

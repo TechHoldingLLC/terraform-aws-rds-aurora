@@ -82,6 +82,12 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "vpc_security_group_ids" {
+  description = "VPC security groups for RDS"
+  type        = list(string)
+  default     = []
+}
+
 # ------------------------------------------------------------------------------
 # OPTIONAL VARIABLES
 # ------------------------------------------------------------------------------
