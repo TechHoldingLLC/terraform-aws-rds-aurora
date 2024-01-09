@@ -81,4 +81,3 @@ No modules.
 | <a name="output_db_username"></a> [db\_username](#output\_db\_username) | n/a |
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
 | <a name="output_reader_endpoint"></a> [reader\_endpoint](#output\_reader\_endpoint) | n/a |
-| <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | n/a |

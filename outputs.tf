@@ -27,7 +27,3 @@ output "db_port" {
 output "reader_endpoint" {
   value = aws_rds_cluster.db.reader_endpoint
 }
-
-output "security_group_id" {
-  value = module.sg_rds.id
-}
