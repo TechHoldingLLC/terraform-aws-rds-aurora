@@ -32,6 +32,9 @@ module "rds_aurora_postgresql" {
   deletion_protection = true
   skip_final_snapshot = false
 
+  ## Security group rules
+  vpc_security_group_ids = [module.sg_aurora_postgresql.id]
+
   cluster_custom_parameters = [{
     apply_method = "pending-reboot"
     name         = "name"
@@ -61,6 +64,9 @@ Following values will change, rest of the code will be same as above.
   engine                          = "aurora-mysql"
   engine_version                  = "8.0"
   enabled_cloudwatch_logs_exports = ["general", "audit", "error", "slowquery"] 
+
+  ## Security group rules
+  vpc_security_group_ids = [module.sg_aurora_mysql.id]
 ```
 
 ## Create RDS instances with serverless instance_class for `aurora-mysql`
@@ -99,6 +105,9 @@ module "rds_serverless" {
   deletion_protection = true
   skip_final_snapshot = false
 
+  ## Security group rules
+  vpc_security_group_ids = [module.sg_aurora_mysql.id]
+
   cluster_custom_parameters = [{
     apply_method = "pending-reboot"
     name         = "name"
@@ -128,6 +137,9 @@ Following values will change, rest of the code will be same as above.
   engine                          = "aurora-postgresql"
   engine_version                  = "15.3"
   enabled_cloudwatch_logs_exports = ["postgresql"] 
+
+  ## Security group rules
+  vpc_security_group_ids = [module.sg_aurora_postgresql.id]
 ```
 
 ## Create RDS when engine_mode is serverless for `aurora-postgresql`
@@ -169,6 +181,9 @@ module "rds_engine_mode_serverless" {
 
   deletion_protection = true
   skip_final_snapshot = false
+
+  ## Security group rules
+  vpc_security_group_ids = [module.sg_aurora_postgresql.id]
 
   instance_custom_parameters = [
     # https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html

@@ -68,6 +68,7 @@ No modules.
 | <a name="input_storage_encrypted"></a> [storage\_encrypted](#input\_storage\_encrypted) | Skip final snapshot | `bool` | `true` | no |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | RDS subnet group | `list(any)` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC id | `string` | n/a | yes |
+| <a name="input_vpc_security_group_ids"></a> [vpc\_security\_group\_ids](#input\_vpc\_security\_group\_ids) | VPC security groups for RDS | `list(string)` | `[]` | no |
 
 ## Outputs
 
