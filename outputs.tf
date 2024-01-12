@@ -6,12 +6,12 @@ output "endpoint" {
   value = aws_rds_cluster.db.endpoint
 }
 
-output "db_username" {
+output "db_master_username" {
   value     = aws_rds_cluster.db.master_username
   sensitive = true
 }
 
-output "db_password" {
+output "db_master_password" {
   value     = aws_rds_cluster.db.master_password
   sensitive = true
 }

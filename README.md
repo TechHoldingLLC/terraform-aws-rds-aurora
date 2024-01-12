@@ -75,9 +75,9 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_cluster_identifier"></a> [cluster\_identifier](#output\_cluster\_identifier) | n/a |
+| <a name="output_db_master_password"></a> [db\_master\_password](#output\_db\_master\_password) | n/a |
+| <a name="output_db_master_username"></a> [db\_master\_username](#output\_db\_master\_username) | n/a |
 | <a name="output_db_name"></a> [db\_name](#output\_db\_name) | n/a |
-| <a name="output_db_password"></a> [db\_password](#output\_db\_password) | n/a |
 | <a name="output_db_port"></a> [db\_port](#output\_db\_port) | n/a |
-| <a name="output_db_username"></a> [db\_username](#output\_db\_username) | n/a |
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
 | <a name="output_reader_endpoint"></a> [reader\_endpoint](#output\_reader\_endpoint) | n/a |
