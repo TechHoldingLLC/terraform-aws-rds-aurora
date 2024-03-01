@@ -32,7 +32,7 @@ resource "aws_rds_cluster" "db" {
   skip_final_snapshot             = var.skip_final_snapshot
   copy_tags_to_snapshot           = true
   vpc_security_group_ids          = var.vpc_security_group_ids
-  db_subnet_group_name            = aws_db_subnet_group.rds.id
+  db_subnet_group_name            = var.db_subnet_group_name != "" ? var.db_subnet_group_name : aws_db_subnet_group.rds[0].id
   db_cluster_parameter_group_name = local.cluster_parameter_group
   port                            = var.port == null ? local.port : var.port
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
@@ -89,6 +89,7 @@ resource "aws_rds_cluster_instance" "db" {
 }
 
 resource "aws_db_subnet_group" "rds" {
+  count      = var.db_subnet_group_name == "" ? 1 : 0
   name       = var.name
   subnet_ids = var.subnets
   tags = {

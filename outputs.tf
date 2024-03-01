@@ -29,5 +29,5 @@ output "reader_endpoint" {
 }
 
 output "rds_subnet_group_id" {
-  value = aws_db_subnet_group.rds.id
+  value = var.db_subnet_group_name == "" ? aws_db_subnet_group.rds[0].id : null
 }
