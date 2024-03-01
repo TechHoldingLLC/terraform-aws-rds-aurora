@@ -28,6 +28,6 @@ output "reader_endpoint" {
   value = aws_rds_cluster.db.reader_endpoint
 }
 
-output "rds_subnet_group_id" {
-  value = var.db_subnet_group_name == "" ? aws_db_subnet_group.rds[0].id : null
+output "rds_subnet_group_name" {
+  value = local.db_subnet_group_name
 }
