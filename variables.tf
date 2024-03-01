@@ -205,3 +205,8 @@ variable "scaling_configuration" {
   type        = map(any)
   default     = {}
 }
+
+variable "db_subnet_group_name" {
+  description = "DB subnet group name"
+  default     = ""
+}

@@ -13,6 +13,7 @@ locals {
   cluster_parameter_group  = length(var.cluster_custom_parameters) > 0 ? aws_rds_cluster_parameter_group.cluster[0].name : "default.${local.family}"
   instance_parameter_group = length(var.instance_custom_parameters) > 0 ? aws_db_parameter_group.instance[0].name : "default.${local.family}"
   port                     = var.engine == "aurora-postgresql" ? 5432 : 3306
+  db_subnet_group_name     = var.db_subnet_group_name != "" ? var.db_subnet_group_name : aws_db_subnet_group.rds[0].id
 }
 
 #tfsec:ignore:aws-rds-encrypt-cluster-storage-data
@@ -32,7 +33,7 @@ resource "aws_rds_cluster" "db" {
   skip_final_snapshot             = var.skip_final_snapshot
   copy_tags_to_snapshot           = true
   vpc_security_group_ids          = var.vpc_security_group_ids
-  db_subnet_group_name            = aws_db_subnet_group.rds.id
+  db_subnet_group_name            = local.db_subnet_group_name
   db_cluster_parameter_group_name = local.cluster_parameter_group
   port                            = var.port == null ? local.port : var.port
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
@@ -71,7 +72,7 @@ resource "aws_rds_cluster_instance" "db" {
   identifier                 = "${aws_rds_cluster.db.id}-${count.index + 1}"
   cluster_identifier         = aws_rds_cluster.db.id
   instance_class             = var.instance_class
-  db_subnet_group_name       = aws_rds_cluster.db.db_subnet_group_name
+  db_subnet_group_name       = local.db_subnet_group_name
   db_parameter_group_name    = local.instance_parameter_group
   engine                     = aws_rds_cluster.db.engine
   engine_version             = aws_rds_cluster.db.engine_version
@@ -89,6 +90,7 @@ resource "aws_rds_cluster_instance" "db" {
 }
 
 resource "aws_db_subnet_group" "rds" {
+  count      = var.db_subnet_group_name == "" ? 1 : 0
   name       = var.name
   subnet_ids = var.subnets
   tags = {
