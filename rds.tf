@@ -19,6 +19,7 @@ locals {
 #tfsec:ignore:aws-rds-encrypt-cluster-storage-data
 resource "aws_rds_cluster" "db" {
   cluster_identifier              = var.name
+  allocated_storage               = var.allocated_storage
   engine                          = var.engine
   engine_version                  = var.engine_version
   engine_mode                     = var.engine_mode

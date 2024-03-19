@@ -34,6 +34,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_allocated_storage"></a> [allocated\_storage](#input\_allocated\_storage) | The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster | `number` | `20` | no |
 | <a name="input_apply_immediately"></a> [apply\_immediately](#input\_apply\_immediately) | Apply changes imediately | `bool` | `false` | no |
 | <a name="input_auto_minor_version_upgrade"></a> [auto\_minor\_version\_upgrade](#input\_auto\_minor\_version\_upgrade) | Auto minor version upgradation during maintainance window | `bool` | `false` | no |
 | <a name="input_backup_retention_period"></a> [backup\_retention\_period](#input\_backup\_retention\_period) | Backup retention period | `number` | n/a | yes |
@@ -42,6 +43,7 @@ No modules.
 | <a name="input_cluster_custom_parameters"></a> [cluster\_custom\_parameters](#input\_cluster\_custom\_parameters) | RDS cluster custom parameter group | `list(any)` | `[]` | no |
 | <a name="input_create_monitoring_role"></a> [create\_monitoring\_role](#input\_create\_monitoring\_role) | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | `bool` | `false` | no |
 | <a name="input_database_name"></a> [database\_name](#input\_database\_name) | Database name | `string` | n/a | yes |
+| <a name="input_db_subnet_group_name"></a> [db\_subnet\_group\_name](#input\_db\_subnet\_group\_name) | DB subnet group name | `string` | `""` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Deletion protection | `bool` | `true` | no |
 | <a name="input_enabled_cloudwatch_logs_exports"></a> [enabled\_cloudwatch\_logs\_exports](#input\_enabled\_cloudwatch\_logs\_exports) | Enabled cloudwatch logs export | `list(any)` | `[]` | no |
 | <a name="input_engine"></a> [engine](#input\_engine) | RDS db engine | `string` | n/a | yes |
@@ -80,4 +82,5 @@ No modules.
 | <a name="output_db_name"></a> [db\_name](#output\_db\_name) | n/a |
 | <a name="output_db_port"></a> [db\_port](#output\_db\_port) | n/a |
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
+| <a name="output_rds_subnet_group_name"></a> [rds\_subnet\_group\_name](#output\_rds\_subnet\_group\_name) | n/a |
 | <a name="output_reader_endpoint"></a> [reader\_endpoint](#output\_reader\_endpoint) | n/a |

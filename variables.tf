@@ -210,3 +210,9 @@ variable "db_subnet_group_name" {
   description = "DB subnet group name"
   default     = ""
 }
+
+variable "allocated_storage" {
+  description = "The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster"
+  type        = number
+  default     = 20
+}
