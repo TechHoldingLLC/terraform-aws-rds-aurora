@@ -42,7 +42,9 @@ No modules.
 | <a name="input_cluster_custom_parameters"></a> [cluster\_custom\_parameters](#input\_cluster\_custom\_parameters) | RDS cluster custom parameter group | `list(any)` | `[]` | no |
 | <a name="input_create_monitoring_role"></a> [create\_monitoring\_role](#input\_create\_monitoring\_role) | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | `bool` | `false` | no |
 | <a name="input_database_name"></a> [database\_name](#input\_database\_name) | Database name | `string` | n/a | yes |
+| <a name="input_db_subnet_group_name"></a> [db\_subnet\_group\_name](#input\_db\_subnet\_group\_name) | DB subnet group name | `string` | `""` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Deletion protection | `bool` | `true` | no |
+| <a name="input_enable_http_endpoint"></a> [enable\_http\_endpoint](#input\_enable\_http\_endpoint) | Enable HTTP endpoint (data API). | `bool` | `false` | no |
 | <a name="input_enabled_cloudwatch_logs_exports"></a> [enabled\_cloudwatch\_logs\_exports](#input\_enabled\_cloudwatch\_logs\_exports) | Enabled cloudwatch logs export | `list(any)` | `[]` | no |
 | <a name="input_engine"></a> [engine](#input\_engine) | RDS db engine | `string` | n/a | yes |
 | <a name="input_engine_mode"></a> [engine\_mode](#input\_engine\_mode) | RDS DB engine mode | `string` | `"provisioned"` | no |
@@ -74,10 +76,13 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_cluster_arn"></a> [cluster\_arn](#output\_cluster\_arn) | n/a |
 | <a name="output_cluster_identifier"></a> [cluster\_identifier](#output\_cluster\_identifier) | n/a |
 | <a name="output_db_master_password"></a> [db\_master\_password](#output\_db\_master\_password) | n/a |
 | <a name="output_db_master_username"></a> [db\_master\_username](#output\_db\_master\_username) | n/a |
 | <a name="output_db_name"></a> [db\_name](#output\_db\_name) | n/a |
 | <a name="output_db_port"></a> [db\_port](#output\_db\_port) | n/a |
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
+| <a name="output_instance_arns"></a> [instance\_arns](#output\_instance\_arns) | n/a |
+| <a name="output_rds_subnet_group_name"></a> [rds\_subnet\_group\_name](#output\_rds\_subnet\_group\_name) | n/a |
 | <a name="output_reader_endpoint"></a> [reader\_endpoint](#output\_reader\_endpoint) | n/a |

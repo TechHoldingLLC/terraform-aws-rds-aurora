@@ -210,3 +210,8 @@ variable "db_subnet_group_name" {
   description = "DB subnet group name"
   default     = ""
 }
+
+variable "enable_http_endpoint" {
+  description = "Enable HTTP endpoint (data API)."
+  default     = false
+}
