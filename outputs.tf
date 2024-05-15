@@ -31,3 +31,11 @@ output "reader_endpoint" {
 output "rds_subnet_group_name" {
   value = local.db_subnet_group_name
 }
+
+output "cluster_arn" {
+  value = aws_rds_cluster.db.arn
+}
+
+output "instance_arn" {
+  value = aws_rds_cluster_instance.db.arn
+}
