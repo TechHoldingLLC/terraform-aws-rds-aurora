@@ -37,5 +37,5 @@ output "cluster_arn" {
 }
 
 output "instance_arn" {
-  value = aws_rds_cluster_instance.db.arn
+  value = var.instance_count > 0 ? "${aws_rds_cluster_instance.db.*.arn}" : null
 }
