@@ -39,6 +39,7 @@ resource "aws_rds_cluster" "db" {
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
   deletion_protection             = var.deletion_protection
   apply_immediately               = var.apply_immediately
+  enable_http_endpoint            = var.enable_http_endpoint
 
   dynamic "serverlessv2_scaling_configuration" {
     for_each = var.instance_class == "db.serverless" ? [1] : []
