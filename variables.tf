@@ -218,5 +218,6 @@ variable "enable_http_endpoint" {
 
 variable "certificate_identifier" {
   description = "rds certificate identifier"
+  default     = "rds-ca-rsa2048-g1"
   type        = string
 }
