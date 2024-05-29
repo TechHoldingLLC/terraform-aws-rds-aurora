@@ -17,6 +17,7 @@ module "rds_aurora_postgresql" {
   backup_window                   = "02:00-03:00"
   maintenance_window              = "sun:05:00-sun:06:00"
   enabled_cloudwatch_logs_exports = ["postgresql"] # For aurora-postgresql, only postgresql is allowed.
+  certificate_identifier          = "rds-ca-rsa2048-g1"
 
   ## Network
   subnets             = ["subnet_1", "subnet_2"]
@@ -86,6 +87,7 @@ module "rds_serverless" {
   backup_window                   = "02:00-03:00"
   maintenance_window              = "sun:05:00-sun:06:00"
   enabled_cloudwatch_logs_exports = ["general", "audit", "error", "slowquery"]
+  certificate_identifier          = "rds-ca-rsa2048-g1"
 
   ## Define maximum and minimum capacity. Reference link: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#serverlessv2_scaling_configuration-argument-reference
   max_capacity = 2
@@ -158,6 +160,7 @@ module "rds_engine_mode_serverless" {
   backup_retention_period = 1
   backup_window           = "02:00-03:00"
   maintenance_window      = "sun:05:00-sun:06:00"
+  certificate_identifier  = "rds-ca-rsa2048-g1"  
 
  ## Reference link: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#scaling_configuration-argument-reference
   scaling_configuration = {
