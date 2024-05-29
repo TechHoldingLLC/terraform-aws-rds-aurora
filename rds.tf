@@ -79,6 +79,7 @@ resource "aws_rds_cluster_instance" "db" {
   engine_version             = aws_rds_cluster.db.engine_version
   auto_minor_version_upgrade = var.auto_minor_version_upgrade
   publicly_accessible        = var.publicly_accessible
+  ca_cert_identifier         = var.certificate_identifier
 
   ## Enhanced monitoring
   monitoring_interval = var.enhanced_monitoring_interval

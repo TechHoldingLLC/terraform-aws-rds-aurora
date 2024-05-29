@@ -38,6 +38,7 @@ No modules.
 | <a name="input_auto_minor_version_upgrade"></a> [auto\_minor\_version\_upgrade](#input\_auto\_minor\_version\_upgrade) | Auto minor version upgradation during maintainance window | `bool` | `false` | no |
 | <a name="input_backup_retention_period"></a> [backup\_retention\_period](#input\_backup\_retention\_period) | Backup retention period | `number` | n/a | yes |
 | <a name="input_backup_window"></a> [backup\_window](#input\_backup\_window) | When to perform DB backups | `string` | n/a | yes |
+| <a name="input_certificate_identifier"></a> [certificate\_identifier](#input\_certificate\_identifier) | rds certificate identifier | `string` | `"rds-ca-rsa2048-g1"` | no |
 | <a name="input_cloudwatch_log_group_retention_in_days"></a> [cloudwatch\_log\_group\_retention\_in\_days](#input\_cloudwatch\_log\_group\_retention\_in\_days) | The number of days to retain CloudWatch logs for the DB instance | `number` | `30` | no |
 | <a name="input_cluster_custom_parameters"></a> [cluster\_custom\_parameters](#input\_cluster\_custom\_parameters) | RDS cluster custom parameter group | `list(any)` | `[]` | no |
 | <a name="input_create_monitoring_role"></a> [create\_monitoring\_role](#input\_create\_monitoring\_role) | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | `bool` | `false` | no |
@@ -86,3 +87,7 @@ No modules.
 | <a name="output_instance_arns"></a> [instance\_arns](#output\_instance\_arns) | n/a |
 | <a name="output_rds_subnet_group_name"></a> [rds\_subnet\_group\_name](#output\_rds\_subnet\_group\_name) | n/a |
 | <a name="output_reader_endpoint"></a> [reader\_endpoint](#output\_reader\_endpoint) | n/a |
+
+## License
+
+Apache 2 Licensed. See [LICENSE](https://github.com/TechHoldingLLC/terraform-aws-rds-aurora/blob/main/LICENSE) for full details.

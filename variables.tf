@@ -215,3 +215,9 @@ variable "enable_http_endpoint" {
   description = "Enable HTTP endpoint (data API)."
   default     = false
 }
+
+variable "certificate_identifier" {
+  description = "rds certificate identifier"
+  default     = "rds-ca-rsa2048-g1"
+  type        = string
+}
