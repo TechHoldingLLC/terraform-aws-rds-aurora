@@ -72,6 +72,12 @@ variable "name" {
   type        = string
 }
 
+variable "replication_source_identifier" {
+  description = "ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica."
+  type        = string
+  default     = ""
+}
+
 variable "subnets" {
   description = "RDS subnet group"
   type        = list(any)
