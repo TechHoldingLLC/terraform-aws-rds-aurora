@@ -15,6 +15,7 @@ variable "backup_retention_period" {
 variable "database_name" {
   description = "Database name"
   type        = string
+  default     = null
 }
 
 variable "port" {
@@ -60,11 +61,13 @@ variable "instance_class" {
 variable "master_username" {
   description = "RDS Master username"
   type        = string
+  default     = null
 }
 
 variable "master_password" {
   description = "RDS Master password"
   type        = string
+  default     = null
 }
 
 variable "name" {
