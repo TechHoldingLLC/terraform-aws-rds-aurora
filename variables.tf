@@ -15,6 +15,7 @@ variable "backup_retention_period" {
 variable "database_name" {
   description = "Database name"
   type        = string
+  default     = null
 }
 
 variable "port" {
@@ -60,16 +61,24 @@ variable "instance_class" {
 variable "master_username" {
   description = "RDS Master username"
   type        = string
+  default     = null
 }
 
 variable "master_password" {
   description = "RDS Master password"
   type        = string
+  default     = null
 }
 
 variable "name" {
   description = "RDS name"
   type        = string
+}
+
+variable "replication_source_identifier" {
+  description = "ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica."
+  type        = string
+  default     = ""
 }
 
 variable "subnets" {

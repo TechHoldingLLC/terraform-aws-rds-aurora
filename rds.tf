@@ -22,6 +22,7 @@ resource "aws_rds_cluster" "db" {
   engine                          = var.engine
   engine_version                  = var.engine_version
   engine_mode                     = var.engine_mode
+  replication_source_identifier   = var.replication_source_identifier
   master_username                 = var.master_username
   master_password                 = var.master_password
   database_name                   = var.database_name
