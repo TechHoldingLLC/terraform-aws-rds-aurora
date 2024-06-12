@@ -84,11 +84,7 @@ variable "replication_source_identifier" {
 variable "subnets" {
   description = "RDS subnet group"
   type        = list(any)
-}
-
-variable "vpc_id" {
-  description = "VPC id"
-  type        = string
+  default     = []
 }
 
 variable "vpc_security_group_ids" {
