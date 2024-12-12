@@ -41,6 +41,7 @@ resource "aws_rds_cluster" "db" {
   deletion_protection             = var.deletion_protection
   apply_immediately               = var.apply_immediately
   enable_http_endpoint            = var.enable_http_endpoint
+  allow_major_version_upgrade     = var.allow_major_version_upgrade
 
   dynamic "serverlessv2_scaling_configuration" {
     for_each = var.instance_class == "db.serverless" ? [1] : []
