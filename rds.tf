@@ -42,6 +42,11 @@ resource "aws_rds_cluster" "db" {
   apply_immediately               = var.apply_immediately
   enable_http_endpoint            = var.enable_http_endpoint
 
+  ## Performance insights
+  performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
+  performance_insights_kms_key_id       = var.performance_insights_enabled && var.performance_insights_kms_key_id == "" ? data.aws_kms_key.rds.arn : var.performance_insights_kms_key_id
+
   dynamic "serverlessv2_scaling_configuration" {
     for_each = var.instance_class == "db.serverless" ? [1] : []
 
@@ -85,11 +90,6 @@ resource "aws_rds_cluster_instance" "db" {
   ## Enhanced monitoring
   monitoring_interval = var.enhanced_monitoring_interval
   monitoring_role_arn = var.enhanced_monitoring_interval > 0 ? aws_iam_role.enhanced_monitoring[0].arn : null
-
-  ## Performance insights
-  performance_insights_enabled          = var.performance_insights_enabled
-  performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
-  performance_insights_kms_key_id       = var.performance_insights_enabled ? data.aws_kms_key.rds.arn : null
 }
 
 resource "aws_db_subnet_group" "rds" {
