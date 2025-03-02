@@ -226,3 +226,9 @@ variable "certificate_identifier" {
   default     = "rds-ca-rsa2048-g1"
   type        = string
 }
+
+variable "allow_major_version_upgrade" {
+  description = "allow major version upgrade"
+  default     = false
+  type        = bool
+}
